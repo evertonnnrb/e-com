@@ -37,9 +37,6 @@ public class CategoriaService {
     }
 
     private Categoria validateCategoria(long id) {
-        if (getCategoriaById(id).isPresent()) {
-            return getCategoriaById(id).get();
-        }
         return getCategoriaById(id).orElseThrow();
     }
 }

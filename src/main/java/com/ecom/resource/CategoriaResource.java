@@ -25,4 +25,16 @@ public class CategoriaResource {
     public ResponseEntity<Categoria> postCategoria(@RequestBody Categoria categoria) {
         return new ResponseEntity(categoriaService.cadastrarCategoria(categoria), HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Categoria> updateCategoria(@PathVariable long id) {
+        return new ResponseEntity<>(categoriaService.atualizarcategoria(id), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCategoria(@PathVariable long id) {
+        categoriaService.deletarCategoria(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
