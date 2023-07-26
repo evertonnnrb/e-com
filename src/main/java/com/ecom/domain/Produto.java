@@ -1,5 +1,6 @@
 package com.ecom.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Produto extends GenericId {
 
     private BigDecimal valor;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "produto_categoria",
             joinColumns = @JoinColumn(name = "produto_id"),

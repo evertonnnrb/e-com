@@ -1,12 +1,12 @@
 package com.ecom.service;
 
 import com.ecom.domain.Categoria;
+import com.ecom.exceptions.ObjectNotFound;
 import com.ecom.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,8 +18,8 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
-    public Optional<Categoria> getCategoriaById(long id) {
-        return categoriaRepository.findById(id);
+    public Categoria getCategoriaById(long id) {
+        return validateCategoria(id);
     }
 
     public Categoria cadastrarCategoria(Categoria categoria) {
@@ -37,6 +37,7 @@ public class CategoriaService {
     }
 
     private Categoria validateCategoria(long id) {
-        return getCategoriaById(id).orElseThrow();
+        return categoriaRepository.findById(id).orElseThrow(() -> new ObjectNotFound(
+                "No value result", Categoria.class.getName()));
     }
 }

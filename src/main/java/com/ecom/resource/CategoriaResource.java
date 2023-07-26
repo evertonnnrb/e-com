@@ -21,6 +21,11 @@ public class CategoriaResource {
         return new ResponseEntity<>(categoriaService.getAllCategorias(), HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Categoria> getCategoriaPorId(@PathVariable long id){
+        return new ResponseEntity<>(categoriaService.getCategoriaById(id),HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Categoria> postCategoria(@RequestBody Categoria categoria) {
         return new ResponseEntity(categoriaService.cadastrarCategoria(categoria), HttpStatus.CREATED);

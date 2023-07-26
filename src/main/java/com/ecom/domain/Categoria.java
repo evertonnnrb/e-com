@@ -1,5 +1,6 @@
 package com.ecom.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.List;
 public class Categoria extends GenericId {
     private String nome;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
     @Setter(AccessLevel.NONE)
     private List<Produto> produtos = new ArrayList<>();

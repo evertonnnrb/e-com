@@ -21,7 +21,7 @@ class EComApplicationTests {
     @Test
     public void cadastrarCategoria() {
         Categoria categoria = new Categoria();
-        categoria.setName("Eletronicos");
+        categoria.setNome("Eletronicos");
         Categoria cat = service.cadastrarCategoria(categoria);
         Assertions.assertNotNull(cat);
     }

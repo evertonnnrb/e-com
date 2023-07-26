@@ -20,15 +20,15 @@ public class CategoriaServiceTest {
     @Test
     public void cadastrarCategoria() {
         Categoria categoria = new Categoria();
-        categoria.setName("Eletronicos");
+        categoria.setNome("Eletronicos");
         Categoria cat = service.cadastrarCategoria(categoria);
         Assertions.assertNotNull(cat);
     }
 
     @Test
     public void acharCategoria() {
-        Categoria categoria = service.getCategoriaById(3L).get();
-        Assert.assertNull(categoria);
+        Categoria categoria = service.getCategoriaById(2L);
+        Assert.assertNotNull(categoria);
     }
 
 }
