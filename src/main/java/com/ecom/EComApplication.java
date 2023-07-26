@@ -1,9 +1,6 @@
 package com.ecom;
 
-import com.ecom.domain.Categoria;
-import com.ecom.domain.Cidade;
-import com.ecom.domain.Estado;
-import com.ecom.domain.Produto;
+import com.ecom.domain.*;
 import com.ecom.repository.CategoriaRepository;
 import com.ecom.repository.CidadeRepository;
 import com.ecom.repository.EstadoRepository;
@@ -82,6 +79,7 @@ public class EComApplication implements CommandLineRunner {
         categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
         produtoRepository.saveAll(Arrays.asList(mouse, monitor, cadeira));
 
-
+        Cliente cliente = new Cliente();
+        //cliente.setTipoCliente(0);
     }
 }
