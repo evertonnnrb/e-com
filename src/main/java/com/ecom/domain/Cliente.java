@@ -1,6 +1,7 @@
 package com.ecom.domain;
 
 import com.ecom.domain.enuns.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class Cliente extends GenericId {
 
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
 
     @ElementCollection

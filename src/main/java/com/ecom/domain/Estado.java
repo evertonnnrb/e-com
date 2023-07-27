@@ -1,5 +1,6 @@
 package com.ecom.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Estado extends GenericId {
 
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "estado")
+    @JsonBackReference
     private List<Cidade> cidades = new ArrayList<>();
 
     public Estado(String nome, String uf) {
