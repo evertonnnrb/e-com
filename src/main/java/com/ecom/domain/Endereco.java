@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @NoArgsConstructor
@@ -20,9 +21,12 @@ public class Endereco extends GenericId {
     private String complemento;
     private String bairro;
     private String cep;
-    @OneToMany(mappedBy = "enderecos")
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "cidade_id")
     private Cidade cidade;
 }

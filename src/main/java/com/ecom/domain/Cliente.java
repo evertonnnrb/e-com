@@ -6,8 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,9 +24,11 @@ public class Cliente extends GenericId {
     private Integer tipoCliente;
 
     @Setter(AccessLevel.NONE)
-    @ManyToOne
+    @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos = new ArrayList<>();
 
+    @ElementCollection
+    @CollectionTable(name = "telefones_clientes")
     private Set<String> telefones = new HashSet<>();
 
     public Cliente(String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente) {
