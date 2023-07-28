@@ -1,7 +1,9 @@
 package com.ecom;
 
 import com.ecom.domain.*;
+import com.ecom.domain.enuns.EstadoPagemento;
 import com.ecom.domain.enuns.TipoCliente;
+import com.ecom.domain.util.SdfFormatter;
 import com.ecom.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -9,7 +11,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -32,6 +33,12 @@ public class EComApplication implements CommandLineRunner {
 
     @Autowired
     EnderecoRepository enderecoRepository;
+
+    @Autowired
+    PagamentoRepository pagamentoRepository;
+
+    @Autowired
+    PedidoRepository pedidoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(EComApplication.class, args);
@@ -94,6 +101,24 @@ public class EComApplication implements CommandLineRunner {
         mt.getCidades().addAll(Arrays.asList(cuiaba, sinopi));
 
 
+        Pedido pedido1 = new Pedido(
+                SdfFormatter.frmStrToDate("30-01-2023"),
+                maria,nsSrGraca);
+
+        Pedido pedido2 = new Pedido(
+                SdfFormatter.frmStrToDate("30-01-2023"),
+                jao,nsSrGraca);
+
+        Pagamento pagamento1 = new PagamentoComBoleto(EstadoPagemento.QUITADO,pedido1,
+                SdfFormatter.frmStrToDate("30-02-2023"),null);
+        pedido1.setPagamento(pagamento1);
+
+        Pagamento pagamento2 = new PagamentoComCartao(EstadoPagemento.QUITADO,pedido2,3);
+        pedido2.setPagamento(pagamento2);
+
+        maria.getPedidos().add(pedido1);
+        jao.getPedidos().add(pedido2);
+
         estadoRepository.saveAll(Arrays.asList(ms,mt));
         cidadeRepository.saveAll(Arrays.asList(campoGrande,dourados,sinopi,cuiaba));
 
@@ -103,5 +128,8 @@ public class EComApplication implements CommandLineRunner {
         clienteRepository.saveAll(Arrays.asList(maria,jao));
         enderecoRepository.saveAll(Arrays.asList(stJustinha,nsSrGraca));
 
+
+        pagamentoRepository.saveAll(Arrays.asList(pagamento1,pagamento2));
+        pedidoRepository.saveAll(Arrays.asList(pedido1,pedido2));
     }
 }

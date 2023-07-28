@@ -29,9 +29,14 @@ public class Cliente extends GenericId {
     @JsonManagedReference
     private List<Endereco> enderecos = new ArrayList<>();
 
+    @Setter(AccessLevel.NONE)
     @ElementCollection
     @CollectionTable(name = "telefones_clientes")
     private Set<String> telefones = new HashSet<>();
+
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos = new ArrayList<>();
 
     public Cliente(String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente) {
         this.nome = nome;
